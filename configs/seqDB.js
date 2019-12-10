@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const sequelize = new Sequelize('userDB', 'root', '123456', {
 	dialect: 'mysql',
 	host: 'localhost',
+	charset: 'utf8mb4',
 	define: {
 		timestamps: false
 	}

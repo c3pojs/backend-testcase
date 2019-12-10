@@ -2,15 +2,9 @@
 const passport = require('passport');
 const passportJWT = require('passport-jwt');
 const jwtOptions = require("./jwtOptions");
-const User = require('./model/user');
+const User = require('../model/user');
 
-
-// let ExtractJwt = passportJWT.ExtractJwt;
 let JwtStrategy = passportJWT.Strategy;
-
-// let jwtOptions = {};
-// jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-// jwtOptions.secretOrKey = 'wowwow';
 
 // lets create our strategy for web token
 let strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
