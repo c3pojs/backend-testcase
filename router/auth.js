@@ -16,7 +16,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 
 router.post('/register', (req, res) => {
 	let body = req.body;
-	console.log(body);
+	console.log("REGISTER",body);
 	User.create({ login: body.login, password: body.password })
 		.then(success => {
 			console.log('USERsuccessS', success);
