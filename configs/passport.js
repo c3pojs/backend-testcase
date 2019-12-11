@@ -9,13 +9,16 @@ let JwtStrategy = passportJWT.Strategy;
 // lets create our strategy for web token
 let strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
   console.log('payload received', jwt_payload);
-  let user = User.findOne({ where: { id: jwt_payload.id }});
+  User.findOne({ where: { id: jwt_payload.id }}).then(user => {
+      console.log(user);
+      if (user) {
+        next(null, user.dataValues);
+      } else {
+        next(null, false);
+      }
+  });
 
-  if (user) {
-    next(null, user);
-  } else {
-    next(null, false);
-  }
+ 
 });
 // use the strategy
 passport.use(strategy);

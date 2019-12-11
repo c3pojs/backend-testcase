@@ -18,6 +18,8 @@ const User = sequelize.define('user', {
 	}
 });
 
+
+
 User.sync()
   .then(() => console.log('User table created successfully'))
   .catch(err => console.log('oooh, did you enter wrong database credentials?'));
