@@ -3,8 +3,6 @@ const app = express();
 const sequelize = require('./configs/seqDB');
 const bodyParser = require('body-parser');
 const passport = require('./configs/passport');
-const User = require('./model/user');
-const SavedProjects = require('./model/savedProject');
 
 const auth = require('./router/auth');
 const savedProjects = require('./router/savedProjects');
@@ -24,9 +22,6 @@ app.use('/', auth);
 app.use('/projects', savedProjects);
 app.use('/userProjects', usersSavedProjects);
 app.use(passport.initialize());
-
-User.hasMany(SavedProjects);
-SavedProjects.belongsTo(User);
 
 sequelize
 	.sync()

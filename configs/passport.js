@@ -2,15 +2,15 @@
 const passport = require('passport');
 const passportJWT = require('passport-jwt');
 const jwtOptions = require("./jwtOptions");
-const User = require('../model/user');
+const Users = require('../model/users');
 
 let JwtStrategy = passportJWT.Strategy;
 
 // lets create our strategy for web token
 let strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
   console.log('payload received', jwt_payload);
-  User.findOne({ where: { id: jwt_payload.id }}).then(user => {
-      console.log(user);
+  Users.findOne({ where: { id: jwt_payload.id }}).then(user => {
+      // console.log(user);
       if (user) {
         next(null, user.dataValues);
       } else {

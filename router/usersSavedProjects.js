@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const UsersSavedProject = require('../model/usersSavedProjects');
-const SavedProjects = require('../model/savedProject');
-const User = require('../model/user');
+const UsersSavedProject = require('../model/usersProjects');
+const SavedProjects = require('../model/projects');
+const User = require('../model/users');
 const passport = require('../configs/passport');
 
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {

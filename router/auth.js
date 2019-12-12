@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../model/user');
+const {Users} = require('../model');
 const passport = require('../configs/passport');
 const jwtOptions = require('../configs/jwtOptions');
 const jwt = require('jsonwebtoken');
-
+// console.log(User, '&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
-	User.findAll({ raw: true })
+	Users.findAll({ raw: true })
 		.then(users => {
 			console.log('USERS', users);
 			res.send(users);
@@ -17,7 +17,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 router.post('/register', (req, res) => {
 	let body = req.body;
 	console.log('REGISTER', body);
-	User.create({ login: body.login, password: body.password })
+	Users.create({ login: body.login, password: body.password })
 		.then(success => {
 			console.log('USERsuccessS', success);
 			res.send('success');
@@ -31,7 +31,7 @@ router.post('/login', (req, res) => {
 
 	if (!(login && password)) return res.status(401).json({ message: 'No input values' });
 
-	User.findOne({ where: { login: login } }).then(
+	Users.findOne({ where: { login } }).then(
 		user => {
 			console.log('FIND USER', user);
 			if (!user) {
